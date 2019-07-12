@@ -29,6 +29,14 @@ router.get('/addshopCar', addshopCar)
 // 购物车页
 const getShopcarList = require('./getShopcarList')
 router.get('/getShopcarList', getShopcarList)
+// 添加地址数据
+const addAdress = require('./addAdress')
+router.get('/addAdress', addAdress)
+// 获取地址数据
+const getAdress = require('./getAdress')
+router.get('/getAdress', getAdress)
+
+
 // 后台 首页
 const AllData = require('./admin/getData')
 router.get('/admin/AllData', AllData)
