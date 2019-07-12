@@ -29,7 +29,6 @@ module.exports = (req, res) => {
             data: 链接集合失败
           })
         }
-        console.log(result)
         if (!result.length) {
           reject([null, result])
           return

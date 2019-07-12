@@ -29,6 +29,7 @@ module.exports = (req, res) => {
             data: 链接集合失败
           })
         }
+        console.log(result)
         res.send({
           error: 0,
           data: result
