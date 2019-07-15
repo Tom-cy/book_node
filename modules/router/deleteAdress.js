@@ -1,7 +1,6 @@
 const connect = require('../db')
 
 module.exports = (req, res) => {
-
   connect((err, client) => {
     if (err) {
       res.send({
@@ -12,29 +11,41 @@ module.exports = (req, res) => {
     }
 
     let db = client.db("book")
-    // 创建一个集合
-    let Adress = db.collection('Adress')
+    let Adress = db.collection("Adress")
     // 得到传递过来的数据
-    let AdressData = req.query
-
-
+    let AdressUse = req.query
+    AdressData = JSON.parse(AdressUse.data)
+    let id
+    AdressData.filter(v => {
+      id = v.addressId
+    })
+    let whereStr = {
+      addressId: id
+    }
     let findAdress = new Promise((resolve, reject) => {
-      Adress.find({
-        userName: AdressData.userName,
-        phoneNumber: AdressData.phoneNumber
-      }).toArray(function (err, result) {
+      Adress.deleteMany(whereStr, (err, obj) => {
         if (err) {
           res.send({
             error: 2,
-            data: 链接集合失败
+            data: "连接集合失败"
           })
+          return
         }
         res.send({
           error: 0,
-          data: result
+          data: "删除数据成功"
         })
       })
     })
+
+
+
+
+
+
+
+
+
 
   })
 }

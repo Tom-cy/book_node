@@ -35,12 +35,16 @@ router.get('/addAdress', addAdress)
 // 获取地址数据
 const getAdress = require('./getAdress')
 router.get('/getAdress', getAdress)
-
+// 删除地址数据
+const deleteAdress = require('./deleteAdress')
+router.get('/deleteAdress', deleteAdress)
+// 检查数据
+const checkOrder = require('./checkOrder')
+router.post('/checkOrder', checkOrder)
 
 // 后台 首页
 const AllData = require('./admin/getData')
 router.get('/admin/AllData', AllData)
-
 
 
 module.exports = router
