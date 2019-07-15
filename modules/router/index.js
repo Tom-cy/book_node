@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-
 let formidable = require('formidable')
 
 router.all('*', function (req, res, next) {
@@ -38,9 +37,10 @@ router.get('/getAdress', getAdress)
 // 删除地址数据
 const deleteAdress = require('./deleteAdress')
 router.get('/deleteAdress', deleteAdress)
-// 检查数据
-const checkOrder = require('./checkOrder')
-router.post('/checkOrder', checkOrder)
+
+// 查询订单
+const getOrderList = require('./getOrderList')
+router.get('/getOrderList', getOrderList)
 
 // 后台 首页
 const AllData = require('./admin/getData')

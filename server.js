@@ -10,6 +10,13 @@ app.use(router)
 app.use(bodyParser.urlencoded({
   extended: false
 }))
+//parse application/json
+app.use(bodyParser.json())
+
+// // 检查数据
+const checkOrder = require('./modules/router/checkOrder')
+app.post('/checkOrder', checkOrder)
+
 app.listen(9562, () => {
   console.log('9562 Start')
 })
