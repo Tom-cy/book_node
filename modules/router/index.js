@@ -41,10 +41,14 @@ router.get('/deleteAdress', deleteAdress)
 // 查询订单
 const getOrderList = require('./getOrderList')
 router.get('/getOrderList', getOrderList)
+// ---------------------------------------------------------------------------------------------------------------------------------------------
+// 后台 登录Login
+const Adminlogin = require('./admin/login')
+router.get('/admin/login', Adminlogin)
 
 // 后台 首页
-const AllData = require('./admin/getData')
-router.get('/admin/AllData', AllData)
+const AdminData = require('./admin/getData')
+router.get('/admin/AllData', AdminData)
 
 
 module.exports = router
