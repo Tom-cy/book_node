@@ -1,38 +1,43 @@
 const connect = require('../../db')
-Date.prototype.Format = function (fmt) { //author: meizz
-  var o = {
-    "M+": this.getMonth() + 1, //月份
-    "d+": this.getDate(), //日
-    "h+": this.getHours(), //小时
-    "m+": this.getMinutes(), //分
-    "s+": this.getSeconds(), //秒
-    "S": this.getMilliseconds() //毫秒
-  };
-  if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-  for (var k in o)
-    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-  return fmt;
-}
+const fs = require('fs')
+const jwt = require('jsonwebtoken')
+const path = require('path')
+const md5 = require('md5')
+ 
+module.exports = async (ctx, next) => {
+  let adminUserData = JSON.parse(ctx.query.parse)
+  let { username, password } = adminUserData
+  let sql =
+      'SELECT uid FROM t_user WHERE name=? and password=? and is_delete=0',
+    value = [name, md5(password)]
 
-
-module.exports = (req, res) => {
-
-  let adminUserData = JSON.parse(req.query.parse)
   connect((err, client) => {
     if (err) {
       res.send({
-        error: 1,
-        data: '链接数据库失败'
+        error: 0,
+        data: '连接数据库失败'
       })
-      return
     }
 
-    let db = client.db("book")
-    let adminUser = db.collection("adminUser")
-
-    let findadminUser = new Promise((resolve, reject) => {
-
-    })
-
+    let db = client.db('book')
   })
+  //   await db
+  //     .query(sql, value)
+  //     .then(res => {
+  //       if (res && res.length > 0) {
+  //         let val = res[0]
+  //         let uid = val['uid']
+  //         let token = generateToken({ uid })
+  //         ctx.body = {
+  //           ...Tips[0],
+  //           data: { token }
+  //         }
+  //       } else {
+  //         ctx.body = Tips[1006]
+  //       }
+  //     })
+  //     .catch(e => {
+  //       ctx.body = Tips[1002]
+  //     })
+  // })
 }
