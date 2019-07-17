@@ -1,43 +1,73 @@
 const connect = require('../../db')
-const fs = require('fs')
-const jwt = require('jsonwebtoken')
-const path = require('path')
-const md5 = require('md5')
- 
-module.exports = async (ctx, next) => {
-  let adminUserData = JSON.parse(ctx.query.parse)
+const Jwt = require('../../tools/jwt')
+module.exports = (req, res) => {
+  let adminUserData = JSON.parse(req.query.parse)
   let { username, password } = adminUserData
-  let sql =
-      'SELECT uid FROM t_user WHERE name=? and password=? and is_delete=0',
-    value = [name, md5(password)]
-
   connect((err, client) => {
     if (err) {
       res.send({
-        error: 0,
+        error: 2,
         data: '连接数据库失败'
       })
     }
 
     let db = client.db('book')
+    let adminUsers = db.collection('adminUsers')
+    let Where = {
+      username: username
+    }
+    let findAdminUser = new Promise((resolve, reject) => {
+      adminUsers.findOne(Where, (err, result) => {
+        if (err) {
+          res.send({
+            error: 3,
+            data: '查找用户失败'
+          })
+          return
+        }
+        // 用户第一次来执行catch事件
+        // 用户第二次来执行then 事件
+        if (result) {
+          resolve(result)
+        } else {
+          reject(req.query)
+        }
+      })
+    })
+
+    findAdminUser
+      .then(respone => {
+        if (respone.password === adminUserData.password) {
+          // 登陆成功，添加token验证
+          let id = respone._id.toString()
+          let jwt = new Jwt(id)
+          
+          console.log(jwt)
+          let token = jwt.generateToken()
+
+          // console.log(token)
+
+          res.send({
+            error: 0,
+            data: '登录成功'
+          })
+        } else {
+          res.send({
+            error: 1,
+            data: '密码错误'
+          })
+        }
+      })
+      .catch(respone => {
+        adminUsers.insertOne(adminUserData, (err, res) => {
+          if (err) {
+            res.send({
+              error: 4,
+              data: '插入用户失败'
+            })
+            return
+          }
+        })
+      })
   })
-  //   await db
-  //     .query(sql, value)
-  //     .then(res => {
-  //       if (res && res.length > 0) {
-  //         let val = res[0]
-  //         let uid = val['uid']
-  //         let token = generateToken({ uid })
-  //         ctx.body = {
-  //           ...Tips[0],
-  //           data: { token }
-  //         }
-  //       } else {
-  //         ctx.body = Tips[1006]
-  //       }
-  //     })
-  //     .catch(e => {
-  //       ctx.body = Tips[1002]
-  //     })
-  // })
 }
