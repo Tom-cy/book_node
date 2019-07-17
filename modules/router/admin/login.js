@@ -1,5 +1,5 @@
 const connect = require('../../db')
-const Jwt = require('../../tools/jwt')
+const JwtUtil = require('../../tools/jwt.js')
 module.exports = (req, res) => {
   let adminUserData = JSON.parse(req.query.parse)
   let { username, password } = adminUserData
@@ -40,15 +40,11 @@ module.exports = (req, res) => {
         if (respone.password === adminUserData.password) {
           // 登陆成功，添加token验证
           let id = respone._id.toString()
-          let jwt = new Jwt(id)
-          
-          console.log(jwt)
-          let token = jwt.generateToken()
-
-          // console.log(token)
-
+          let jwts = new JwtUtil(id)
+          let token = jwts.generateToken()
           res.send({
             error: 0,
+            token: token,
             data: '登录成功'
           })
         } else {
@@ -59,7 +55,7 @@ module.exports = (req, res) => {
         }
       })
       .catch(respone => {
-        adminUsers.insertOne(adminUserData, (err, res) => {
+        adminUsers.insertOne(adminUserData, (err, result) => {
           if (err) {
             res.send({
               error: 4,
@@ -67,6 +63,10 @@ module.exports = (req, res) => {
             })
             return
           }
+          res.send({
+            error: 0,
+            data: '注册成功'
+          })
         })
       })
   })
