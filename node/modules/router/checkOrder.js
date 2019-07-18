@@ -35,7 +35,6 @@ module.exports = (req, res) => {
     let day = nowDate.getDate()
     let month = nowDate.getMonth() + 1
     let year = nowDate.getFullYear()
-    console.log(checkOrderList)
     let orderInfo = {
       // 订单人
       owner: checkOrderList.userName,

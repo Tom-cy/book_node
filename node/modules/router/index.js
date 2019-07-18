@@ -2,23 +2,25 @@ const express = require('express')
 const router = express.Router()
 let formidable = require('formidable')
 
-router.all('*', function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Header", "Content-Type,Content-Length,Authorization,Accept,X-Requested-With");
-  res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-  res.header("X-powered-By", "3.2.1");
+router.all('*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Credentials', 'true')
+  res.header('Access-Control-Allow-Methods', '*')
+  res.header(
+    'Access-Control-Allow-Header',
+    'Content-Type,Access-Token',
+    'Content-Type,Content-Length,Authorization,Accept,X-Requested-With'
+  )
+  res.header('Access-Control-Expose-Headers', '*')
+  res.header('X-powered-By', '3.2.1')
 
   if (req.method === 'OPTIONS') {
-    res.send(200)
+    res.sendStatus(200)
   } else {
     next()
   }
-
-
 })
-
 // 引入文件
-
 //小程序 login页
 const login = require('./login')
 router.get('/login', login)
@@ -46,9 +48,16 @@ router.get('/getOrderList', getOrderList)
 const Adminlogin = require('./admin/login')
 router.get('/admin/login', Adminlogin)
 
-// 后台 首页
+// 后台 数据
 const AdminData = require('./admin/getData')
 router.get('/admin/AllData', AdminData)
+// 后台 地址信息
+const AdminAdress = require('./admin/getAdress')
+router.get('/admin/getAdress', AdminAdress)
+
+// // 修改地址数据
+const changeAdress = require('./admin/changeAdress')
+router.post('/admin/changeAdress', changeAdress)
 
 
 module.exports = router

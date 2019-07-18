@@ -16,8 +16,6 @@ module.exports = (req, res) => {
     let Adress = db.collection('Adress')
     // 得到传递过来的数据
     let AdressData = req.query
-
-
     let findAdress = new Promise((resolve, reject) => {
       Adress.find({
         userName: AdressData.userName,
