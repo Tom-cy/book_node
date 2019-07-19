@@ -19,7 +19,6 @@ module.exports = (req, res) => {
             data: '查询集合失败'
           })
         }
-        console.log(result)
         res.send({
           error:0,
           message:"用户数据",

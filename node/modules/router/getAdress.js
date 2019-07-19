@@ -1,7 +1,6 @@
 const connect = require('../db')
 
 module.exports = (req, res) => {
-
   connect((err, client) => {
     if (err) {
       res.send({
@@ -17,6 +16,7 @@ module.exports = (req, res) => {
     // 得到传递过来的数据
     let AdressData = req.query
 
+ 
 
     let findAdress = new Promise((resolve, reject) => {
       Adress.find({
