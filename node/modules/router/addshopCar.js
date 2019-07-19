@@ -79,7 +79,7 @@ module.exports = (req, res) => {
             var updateStr = {
               $set: {
                 num: shop.num,
-                allprice: shop.price
+                allprice: +shop.price
               }
             }
             // 判断数据是否重复，重复数据数量+1

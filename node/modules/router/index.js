@@ -58,6 +58,12 @@ router.get('/admin/getAdress', AdminAdress)
 // // 修改地址数据
 const changeAdress = require('./admin/changeAdress')
 router.post('/admin/changeAdress', changeAdress)
-
-
+// 后台 订单信息
+const getcheckOrder = require('./admin/getcheckOrder')
+router.get('/admin/getcheckOrder', getcheckOrder)
+ 
+// 后台用户数据
+const getUserlist = require('./admin/getUserlist')
+router.get('/admin/getUserlist', getUserlist)
+ 
 module.exports = router
