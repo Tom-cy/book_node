@@ -2,14 +2,18 @@ const express = require('express')
 const app = new express()
 const router = require('./modules/router')
 const bodyParser = require('body-parser')
+const compression = require('compression')
+app.use(compression())
 // const cors = require("cors")
 
 // app.use(cors)
 // 创建 application/x-www-form-urlencoded 编码解析
 app.use(router)
-app.use(bodyParser.urlencoded({
-  extended: false
-}))
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+)
 //parse application/json
 app.use(bodyParser.json())
 
