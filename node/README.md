@@ -4,6 +4,7 @@
   购物车集合:shopCar
   检查订单集合:checkOrder
   用户集合: user
+  面试数据集合:MsCollect
 
 
 
