@@ -38,6 +38,13 @@ router.get('/deleteAdress', deleteAdress)
 // 查询订单
 const getOrderList = require('./getOrderList')
 router.get('/getOrderList', getOrderList)
+
+// ms 数据
+const getMs = require('./getMs')
+router.get('/getMs', getMs)
+
+
+
 // ---------------------------------------------------------------------------------------------------------------------------------------------
 // 后台 登录Login
 const Adminlogin = require('./admin/login')
@@ -60,5 +67,10 @@ router.get('/admin/getcheckOrder', getcheckOrder)
 // 后台用户数据
 const getUserlist = require('./admin/getUserlist')
 router.get('/admin/getUserlist', getUserlist)
+
+
+// 后台面试数据
+const getMsData = require('./admin/getMsData')
+router.get('/admin/getMsData', getMsData)
  
 module.exports = router
