@@ -2,6 +2,7 @@ const express = require('express')
 const app = new express()
 const router = require('./modules/router')
 const bodyParser = require('body-parser')
+// 开启gzip 压缩，如果关闭，注释下面两行代码
 const compression = require('compression')
 app.use(compression())
 // const cors = require("cors")
