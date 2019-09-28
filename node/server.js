@@ -2,6 +2,7 @@ const express = require('express')
 const app = new express()
 const router = require('./modules/router')
 const bodyParser = require('body-parser')
+// 开启gzip 压缩，如果关闭，注释下面两行代码
 const compression = require('compression')
 app.use(compression())
 // const cors = require("cors")
@@ -23,6 +24,9 @@ app.post('/checkOrder', checkOrder)
 // // // // 修改地址数据
 const changeAdress = require('./modules/router/admin/changeAdress')
 app.post('/admin/changeAdress', changeAdress)
+
+const Login = require('./modules/router/admin/login')
+app.post('/admin/login', Login)
 
 app.listen(9562, () => {
   console.log('9562 Start')
