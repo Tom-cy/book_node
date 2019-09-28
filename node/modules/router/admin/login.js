@@ -1,8 +1,11 @@
 const connect = require('../../db')
 const JwtUtil = require('../../tools/jwt.js')
 module.exports = (req, res) => {
-  let adminUserData = JSON.parse(req.query.parse)
-  let { username, password } = adminUserData
+  let adminUserData = req.query
+  let {
+    username,
+    password
+  } = adminUserData
   connect((err, client) => {
     if (err) {
       res.send({
@@ -10,7 +13,6 @@ module.exports = (req, res) => {
         data: '连接数据库失败'
       })
     }
-
     let db = client.db('book')
     let adminUsers = db.collection('adminUsers')
     let Where = {
@@ -18,6 +20,7 @@ module.exports = (req, res) => {
     }
     let findAdminUser = new Promise((resolve, reject) => {
       adminUsers.findOne(Where, (err, result) => {
+        console.log(result)
         if (err) {
           res.send({
             error: 3,
@@ -28,15 +31,18 @@ module.exports = (req, res) => {
         // 用户第一次来执行catch事件
         // 用户第二次来执行then 事件
         if (result) {
+          console.log('执行1')
           resolve(result)
         } else {
+          console.log('执行2')
           reject(req.query)
         }
       })
     })
-
     findAdminUser
       .then(respone => {
+        console.log('执行3')
+        console.log(respone)
         if (respone.password === adminUserData.password) {
           // 登陆成功，添加token验证
           let id = respone._id.toString()
@@ -47,6 +53,7 @@ module.exports = (req, res) => {
             token: token,
             data: '登录成功'
           })
+          return
         } else {
           res.send({
             error: 1,
@@ -55,6 +62,13 @@ module.exports = (req, res) => {
         }
       })
       .catch(respone => {
+        console.log(respone)
+        console.log('执行4')
+
+        // 注册成功，添加token验证
+        let id = respone._id.toString()
+        let jwts = new JwtUtil(id)
+        let token = jwts.generateToken()
         adminUsers.insertOne(adminUserData, (err, result) => {
           if (err) {
             res.send({
@@ -65,6 +79,7 @@ module.exports = (req, res) => {
           }
           res.send({
             error: 0,
+            token: token,
             data: '注册成功'
           })
         })

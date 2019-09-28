@@ -13,7 +13,7 @@ router.use('*', function(req, res, next) {
     res.sendStatus(200) // 意思是，在正常的请求之前，会发送一个验证，是否可以请求。
   } else {
     next()
-  } 
+  }
 })
 // 引入文件
 //小程序 login页
@@ -43,12 +43,10 @@ router.get('/getOrderList', getOrderList)
 const getMs = require('./getMs')
 router.get('/getMs', getMs)
 
-
-
 // ---------------------------------------------------------------------------------------------------------------------------------------------
 // 后台 登录Login
-const Adminlogin = require('./admin/login')
-router.get('/admin/login', Adminlogin)
+// const Adminlogin = require('./admin/login')
+// router.get('/admin/login', Adminlogin)
 
 // 后台 数据
 const AdminData = require('./admin/getData')
@@ -63,14 +61,16 @@ router.get('/admin/getAdress', AdminAdress)
 // 后台 订单信息
 const getcheckOrder = require('./admin/getcheckOrder')
 router.get('/admin/getcheckOrder', getcheckOrder)
- 
+
 // 后台用户数据
 const getUserlist = require('./admin/getUserlist')
 router.get('/admin/getUserlist', getUserlist)
 
-
 // 后台面试数据
 const getMsData = require('./admin/getMsData')
 router.get('/admin/getMsData', getMsData)
- 
+
+// 后台获取登录用户信息
+const getInfoData = require('./admin/getInfo')
+router.get('/admin/getInfo', getInfoData)
 module.exports = router

@@ -25,6 +25,9 @@ app.post('/checkOrder', checkOrder)
 const changeAdress = require('./modules/router/admin/changeAdress')
 app.post('/admin/changeAdress', changeAdress)
 
+const Login = require('./modules/router/admin/login')
+app.post('/admin/login', Login)
+
 app.listen(9562, () => {
   console.log('9562 Start')
 })
