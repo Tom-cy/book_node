@@ -1,7 +1,7 @@
 const connect = require('../../db')
 const JwtUtil = require('../../tools/jwt.js')
 module.exports = (req, res) => {
-  let adminUserData = JSON.parse(req.query.parse)
+  let adminUserData = req.query
   let { username, password } = adminUserData
   connect((err, client) => {
     if (err) {
@@ -10,7 +10,6 @@ module.exports = (req, res) => {
         data: '连接数据库失败'
       })
     }
-
     let db = client.db('book')
     let adminUsers = db.collection('adminUsers')
     let Where = {
@@ -34,7 +33,6 @@ module.exports = (req, res) => {
         }
       })
     })
-
     findAdminUser
       .then(respone => {
         if (respone.password === adminUserData.password) {
@@ -47,6 +45,7 @@ module.exports = (req, res) => {
             token: token,
             data: '登录成功'
           })
+          return
         } else {
           res.send({
             error: 1,
@@ -55,6 +54,10 @@ module.exports = (req, res) => {
         }
       })
       .catch(respone => {
+        // 注册成功，添加token验证
+        let id = respone._id.toString()
+        let jwts = new JwtUtil(id)
+        let token = jwts.generateToken()
         adminUsers.insertOne(adminUserData, (err, result) => {
           if (err) {
             res.send({
@@ -65,6 +68,7 @@ module.exports = (req, res) => {
           }
           res.send({
             error: 0,
+            token: token,
             data: '注册成功'
           })
         })
