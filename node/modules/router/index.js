@@ -43,6 +43,10 @@ router.get('/getOrderList', getOrderList)
 const getMs = require('./getMs')
 router.get('/getMs', getMs)
 
+// 房乐美数据
+const getFLM = require('./getFLM')
+router.get('/getFLM', getFLM)
+
 // ---------------------------------------------------------------------------------------------------------------------------------------------
 // 后台 登录Login
 // const Adminlogin = require('./admin/login')
@@ -62,7 +66,7 @@ router.get('/admin/getAdress', AdminAdress)
 const getcheckOrder = require('./admin/getcheckOrder')
 router.get('/admin/getcheckOrder', getcheckOrder)
 
-// 后台用户数据
+//  
 const getUserlist = require('./admin/getUserlist')
 router.get('/admin/getUserlist', getUserlist)
 
@@ -70,7 +74,18 @@ router.get('/admin/getUserlist', getUserlist)
 const getMsData = require('./admin/getMsData')
 router.get('/admin/getMsData', getMsData)
 
+
+// 房乐美数据
+const getAdminFLM = require('./admin/getFLM')
+router.get('/admin/getFLM', getAdminFLM)
+
+
 // 后台获取登录用户信息
 const getInfoData = require('./admin/getInfo')
 router.get('/admin/getInfo', getInfoData)
+
+
+
+
+
 module.exports = router
