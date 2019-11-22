@@ -28,6 +28,13 @@ app.post('/admin/changeAdress', changeAdress)
 const Login = require('./modules/router/admin/login')
 app.post('/admin/login', Login)
 
+const MSData = require('./modules/router/admin/getMsData')
+app.post('/admin/getMsData', MSData)
+
+
+
+
+
 app.listen(9562, () => {
   console.log('9562 Start')
 })

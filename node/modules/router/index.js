@@ -70,9 +70,9 @@ router.get('/admin/getcheckOrder', getcheckOrder)
 const getUserlist = require('./admin/getUserlist')
 router.get('/admin/getUserlist', getUserlist)
 
-// 后台面试数据
-const getMsData = require('./admin/getMsData')
-router.get('/admin/getMsData', getMsData)
+// // 后台面试数据
+// const getMsData = require('./admin/getMsData')
+// router.post('/admin/getMsData', getMsData)
 
 
 // 房乐美数据
