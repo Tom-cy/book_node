@@ -39,9 +39,9 @@ router.get('/deleteAdress', deleteAdress)
 const getOrderList = require('./getOrderList')
 router.get('/getOrderList', getOrderList)
 
-// ms 数据
-const getMs = require('./getMs')
-router.get('/getMs', getMs)
+// FLM 平台管理中心 数据
+const getFLMPtai = require('./getFLMPtai')
+router.get('/getFLMPtai', getFLMPtai)
 
 // 房乐美数据
 const getFLM = require('./getFLM')

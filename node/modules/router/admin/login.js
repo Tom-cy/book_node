@@ -17,7 +17,6 @@ module.exports = (req, res) => {
     };
     let findAdminUser = new Promise((resolve, reject) => {
       adminUsers.findOne(Where, (err, result) => {
-        console.log(result)
         if (err) {
           res.send({
             error: 3,
@@ -36,8 +35,6 @@ module.exports = (req, res) => {
     });
     findAdminUser
       .then(respone => {
-        console.log('执行3')
-        console.log(respone)
         if (respone.password === adminUserData.password) {
           // 第一次注册没有_id值，无法产生token
           // 登陆成功，添加token验证

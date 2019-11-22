@@ -53,7 +53,6 @@ module.exports = (req, res) => {
           error:0,
           data:"更新成功"
         })
-        console.log(res)
       })
     })
   })

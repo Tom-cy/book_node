@@ -22,7 +22,6 @@ module.exports = (req, res) => {
           reject(err)
           return
         }
-        // console.log(client)
         res.send({
           error: 0,
           data: client

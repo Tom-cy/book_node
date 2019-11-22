@@ -32,7 +32,6 @@ module.exports = (req, res) => {
       })
       return
     }
-
     let db = client.db('book')
     let user = db.collection('user')
 
