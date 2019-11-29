@@ -32,6 +32,12 @@ const MSData = require('./modules/router/admin/getMsData')
 app.post('/admin/getMsData', MSData)
 
 
+const FLMhouse = require('./modules/router/admin/getFLMhouse')
+app.post('/admin/getFLMhouse', FLMhouse)
+
+
+
+
 
 
 

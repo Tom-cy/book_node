@@ -47,6 +47,12 @@ router.get('/getFLMPtai', getFLMPtai)
 const getFLM = require('./getFLM')
 router.get('/getFLM', getFLM)
 
+
+// 房乐美运营楼盘管理
+const getFLMhouse = require('./getFLMhouse')
+router.get('/getFLMhouse', getFLMhouse)
+
+
 // ---------------------------------------------------------------------------------------------------------------------------------------------
 // 后台 登录Login
 // const Adminlogin = require('./admin/login')
