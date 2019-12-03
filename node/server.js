@@ -36,6 +36,10 @@ const FLMhouse = require('./modules/router/admin/getFLMhouse')
 app.post('/admin/getFLMhouse', FLMhouse)
 
 
+const FLMUserPeo = require('./modules/router/admin/getFLMUserPeo')
+app.post('/admin/getFLMUserPeo', FLMUserPeo)
+
+
 
 
 

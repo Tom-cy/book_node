@@ -52,6 +52,10 @@ router.get('/getFLM', getFLM)
 const getFLMhouse = require('./getFLMhouse')
 router.get('/getFLMhouse', getFLMhouse)
 
+// 房乐美运营楼盘管理
+const getFLMUserPeo = require('./getFLMUserPeo')
+router.get('/getFLMUserPeo', getFLMUserPeo)
+
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------
 // 后台 登录Login
