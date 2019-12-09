@@ -13,6 +13,15 @@ module.exports = (req, res) => {
     let FLMhouse = db.collection('FLMhouse');
 
     FLMhouse.find().toArray((err, result) => {
+      result.map((item, index) => {
+        if (index % 2) {
+          item.houserZhuangTai = true;
+        } else {
+          item.houserZhuangTai = false;
+        }
+      });
+      console.log(result);
+
       if (err) {
         res.send({
           error: 2,
