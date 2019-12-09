@@ -19,6 +19,15 @@ module.exports = (req, res) => {
         } else {
           item.houserZhuangTai = false;
         }
+
+        if (!item.houserAdress) {
+          item.houserAdress =
+            '南昌市青云谱区博学路与博览路交叉口东南' + (index + 100) + '米';
+        }
+
+        if (!item.houserId) {
+          item.houserId = '地字第5101834455463' + index + '号';
+        }
       });
       console.log(result);
 
